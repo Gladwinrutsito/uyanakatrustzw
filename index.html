@@ -1,0 +1,1558 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Uyanaka Trust Zimbabwe - Supporting Vulnerable Children & Orphans
+    </title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        color: #333;
+      }
+
+      /* Header & Navigation */
+      header {
+        background: linear-gradient(135deg, #2c5530, #4a7c59);
+        color: white;
+        padding: 1rem 0;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        font-size: 1.5rem;
+        font-weight: bold;
+      }
+
+      .logo img {
+        width: 50px;
+        height: 50px;
+        margin-right: 10px;
+        border-radius: 50%;
+      }
+
+      .nav-links {
+        display: flex;
+        list-style: none;
+        gap: 2rem;
+      }
+
+      .nav-links a {
+        color: white;
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+
+      .nav-links a:hover {
+        color: #90ee90;
+      }
+
+      .mobile-menu {
+        display: none;
+        flex-direction: column;
+        cursor: pointer;
+      }
+
+      .mobile-menu span {
+        width: 25px;
+        height: 3px;
+        background: white;
+        margin: 3px 0;
+        transition: 0.3s;
+      }
+
+      /* Hero Section with Carousel */
+      .hero {
+        height: 100vh;
+        margin-top: 80px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero-carousel {
+        position: relative;
+        width: 100%;
+        height: 100%;
+      }
+
+      .carousel-slide {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transition: opacity 1s ease-in-out;
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .carousel-slide.active {
+        opacity: 1;
+      }
+
+      .carousel-slide::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4));
+        z-index: 1;
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 2;
+        text-align: center;
+        color: white;
+        max-width: 800px;
+        padding: 0 2rem;
+      }
+
+      .hero-content h1 {
+        font-size: 3.5rem;
+        margin-bottom: 1rem;
+        animation: fadeInUp 1s ease;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      }
+
+      .hero-content p {
+        font-size: 1.3rem;
+        margin-bottom: 2rem;
+        animation: fadeInUp 1s ease 0.3s both;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+      }
+
+      .cta-buttons {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+        animation: fadeInUp 1s ease 0.6s both;
+      }
+
+      /* Carousel Navigation */
+      .carousel-nav {
+        position: absolute;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 10px;
+        z-index: 3;
+      }
+
+      .carousel-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.5);
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .carousel-dot.active {
+        background: white;
+        transform: scale(1.2);
+      }
+
+      /* Carousel Arrows */
+      .carousel-arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(255, 255, 255, 0.2);
+        border: none;
+        color: white;
+        font-size: 2rem;
+        padding: 1rem;
+        cursor: pointer;
+        border-radius: 50%;
+        transition: all 0.3s ease;
+        z-index: 3;
+        backdrop-filter: blur(10px);
+      }
+
+      .carousel-arrow:hover {
+        background: rgba(255, 255, 255, 0.3);
+        transform: translateY(-50%) scale(1.1);
+      }
+
+      .carousel-arrow.prev {
+        left: 30px;
+      }
+
+      .carousel-arrow.next {
+        right: 30px;
+      }
+
+      /* Slide Content Variations */
+      .slide-content {
+        position: relative;
+        z-index: 2;
+        text-align: center;
+        color: white;
+        max-width: 800px;
+        padding: 0 2rem;
+      }
+
+      .slide-content h2 {
+        font-size: 3.5rem;
+        margin-bottom: 1rem;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      }
+
+      .slide-content p {
+        font-size: 1.3rem;
+        margin-bottom: 2rem;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+      }
+
+      .btn {
+        padding: 12px 30px;
+        border: none;
+        border-radius: 30px;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: all 0.3s;
+        text-decoration: none;
+        display: inline-block;
+      }
+
+      .btn-primary {
+        background: #ff6b35;
+        color: white;
+      }
+
+      .btn-secondary {
+        background: transparent;
+        color: white;
+        border: 2px solid white;
+      }
+
+      .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      /* Impact Section */
+      .impact {
+        padding: 5rem 2rem;
+        background: #f8f9fa;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .section-title {
+        text-align: center;
+        font-size: 2.5rem;
+        margin-bottom: 3rem;
+        color: #2c5530;
+      }
+
+      .impact-stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        margin-bottom: 3rem;
+      }
+
+      .stat-card {
+        background: white;
+        padding: 2rem;
+        border-radius: 15px;
+        text-align: center;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s;
+      }
+
+      .stat-card:hover {
+        transform: translateY(-5px);
+      }
+
+      .stat-number {
+        font-size: 3rem;
+        font-weight: bold;
+        color: #ff6b35;
+      }
+
+      .stat-label {
+        font-size: 1.2rem;
+        color: #666;
+        margin-top: 0.5rem;
+      }
+
+      /* Programs Section */
+      .programs {
+        padding: 5rem 2rem;
+      }
+
+      .program-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+      }
+
+      .program-card {
+        background: white;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s;
+      }
+
+      .program-card:hover {
+        transform: translateY(-5px);
+      }
+
+      .program-image {
+        height: 200px;
+        background-size: cover;
+        background-position: center;
+      }
+
+      .program-content {
+        padding: 2rem;
+      }
+
+      .program-content h3 {
+        color: #2c5530;
+        margin-bottom: 1rem;
+      }
+
+      /* Donation Section */
+      .donation {
+        background: linear-gradient(135deg, #2c5530, #4a7c59);
+        color: white;
+        padding: 5rem 2rem;
+        text-align: center;
+      }
+
+      .donation-options {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin: 3rem 0;
+      }
+
+      .donation-card {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 2rem;
+        border-radius: 15px;
+        backdrop-filter: blur(10px);
+      }
+
+      .amount-buttons {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+        margin: 2rem 0;
+      }
+
+      .amount-btn {
+        padding: 1rem;
+        background: transparent;
+        border: 2px solid white;
+        color: white;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+
+      .amount-btn:hover,
+      .amount-btn.active {
+        background: white;
+        color: #2c5530;
+      }
+
+      .payment-methods {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+        margin: 2rem 0;
+      }
+
+      .payment-method {
+        padding: 1rem;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+
+      .payment-method:hover {
+        background: rgba(255, 255, 255, 0.2);
+      }
+
+      /* Footer */
+      footer {
+        background: #1a1a1a;
+        color: white;
+        padding: 3rem 2rem 1rem;
+      }
+
+      .footer-content {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .footer-section h3 {
+        margin-bottom: 1rem;
+        color: #90ee90;
+      }
+
+      .social-links {
+        display: flex;
+        gap: 1rem;
+        margin-top: 1rem;
+      }
+
+      .social-links a {
+        color: white;
+        font-size: 1.5rem;
+        transition: color 0.3s;
+      }
+
+      .social-links a:hover {
+        color: #90ee90;
+      }
+
+      /* Modal */
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 2000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+      }
+
+      .modal-content {
+        background-color: white;
+        margin: 5% auto;
+        padding: 2rem;
+        border-radius: 15px;
+        width: 90%;
+        max-width: 500px;
+        position: relative;
+      }
+
+      .close {
+        position: absolute;
+        right: 1rem;
+        top: 1rem;
+        font-size: 2rem;
+        cursor: pointer;
+      }
+
+      .form-group {
+        margin-bottom: 1rem;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        color: #333;
+      }
+
+      .form-group input,
+      .form-group select,
+      .form-group textarea {
+        width: 100%;
+        padding: 0.8rem;
+        border: 2px solid #ddd;
+        border-radius: 5px;
+        font-size: 1rem;
+      }
+
+      /* Animations */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Mobile Responsive */
+      @media (max-width: 768px) {
+        .nav-links {
+          display: none;
+        }
+
+        .mobile-menu {
+          display: flex;
+        }
+
+        .hero-content h1 {
+          font-size: 2.5rem;
+        }
+
+        .cta-buttons {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .amount-buttons {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      .success-message {
+        background: #d4edda;
+        color: #155724;
+        padding: 1rem;
+        border-radius: 5px;
+        margin: 1rem 0;
+        border: 1px solid #c3e6cb;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header>
+      <nav>
+        <div class="logo">
+          <!-- Replace with your actual logo -->
+          <img
+            src="logo.png"
+            alt="Uyanaka Trust Logo"
+            style="background: #90ee90"
+          />
+          <span>Uyanaka Trust</span>
+        </div>
+        <ul class="nav-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#programs">Programs</a></li>
+          <li><a href="#impact">Impact</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#donate">Donate</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="mobile-menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Hero Section with Carousel -->
+    <section id="home" class="hero">
+      <div class="hero-carousel">
+        <!-- Slide 1: Main Mission -->
+        <div
+          class="carousel-slide active"
+          style="
+            background-image: url('slide1-education.jpg');
+            background-color: #87ceeb;
+          "
+        >
+          <div class="slide-content">
+            <h2>Empowering Zimbabwe's Future</h2>
+            <p>
+              Supporting vulnerable children and orphans through education,
+              nutrition, and care. Together, we can make a lasting difference in
+              young lives.
+            </p>
+            <div class="cta-buttons">
+              <a href="#donate" class="btn btn-primary">Donate Now</a>
+              <a href="#about" class="btn btn-secondary">Learn More</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 2: Education Focus -->
+        <div
+          class="carousel-slide"
+          style="
+            background-image: url('slide2-classroom.jpg');
+            background-color: #98fb98;
+          "
+        >
+          <div class="slide-content">
+            <h2>Education Changes Everything</h2>
+            <p>
+              We've helped over 500 children stay in school by covering fees,
+              uniforms, and supplies. Your support ensures no child's education
+              is interrupted by poverty.
+            </p>
+            <div class="cta-buttons">
+              <a href="#donate" class="btn btn-primary">Support Education</a>
+              <a href="#programs" class="btn btn-secondary">Our Programs</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 3: Nutrition Program -->
+        <div
+          class="carousel-slide"
+          style="
+            background-image: url('slide3-feeding.jpg');
+            background-color: #ffa07a;
+          "
+        >
+          <div class="slide-content">
+            <h2>Nourishing Growing Minds</h2>
+            <p>
+              Over 10,000 nutritious meals provided to ensure children have the
+              energy to learn and grow. Proper nutrition is the foundation of a
+              bright future.
+            </p>
+            <div class="cta-buttons">
+              <a href="#donate" class="btn btn-primary">Feed a Child</a>
+              <a href="#impact" class="btn btn-secondary">See Our Impact</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 4: Success Stories -->
+        <div
+          class="carousel-slide"
+          style="
+            background-image: url('slide4-graduation.jpg');
+            background-color: #dda0dd;
+          "
+        >
+          <div class="slide-content">
+            <h2>Creating Success Stories</h2>
+            <p>
+              From vulnerable orphan to university graduate - witness the
+              transformative power of your support. Every donation creates
+              ripples of positive change.
+            </p>
+            <div class="cta-buttons">
+              <a href="#gallery" class="btn btn-primary">Success Stories</a>
+              <a href="#donate" class="btn btn-secondary">Make Impact</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 5: Community Impact -->
+        <div
+          class="carousel-slide"
+          style="
+            background-image: url('slide5-community.jpg');
+            background-color: #f0e68c;
+          "
+        >
+          <div class="slide-content">
+            <h2>Strengthening Communities</h2>
+            <p>
+              Working hand-in-hand with local communities across Zimbabwe to
+              build sustainable support systems for the most vulnerable
+              children.
+            </p>
+            <div class="cta-buttons">
+              <a href="#contact" class="btn btn-primary">Get Involved</a>
+              <a href="#about" class="btn btn-secondary">Our Approach</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Carousel Navigation Arrows -->
+      <button class="carousel-arrow prev" onclick="changeSlide(-1)">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+      <button class="carousel-arrow next" onclick="changeSlide(1)">
+        <i class="fas fa-chevron-right"></i>
+      </button>
+
+      <!-- Carousel Dots Navigation -->
+      <div class="carousel-nav">
+        <span class="carousel-dot active" onclick="currentSlide(1)"></span>
+        <span class="carousel-dot" onclick="currentSlide(2)"></span>
+        <span class="carousel-dot" onclick="currentSlide(3)"></span>
+        <span class="carousel-dot" onclick="currentSlide(4)"></span>
+        <span class="carousel-dot" onclick="currentSlide(5)"></span>
+      </div>
+    </section>
+
+    <!-- Impact Statistics -->
+    <section id="impact" class="impact">
+      <div class="container">
+        <h2 class="section-title">Our Impact</h2>
+        <div class="impact-stats">
+          <div class="stat-card">
+            <div class="stat-number">500+</div>
+            <div class="stat-label">Children Supported</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">50+</div>
+            <div class="stat-label">Schools Partnered</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">10,000+</div>
+            <div class="stat-label">Meals Provided</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">95%</div>
+            <div class="stat-label">School Retention Rate</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="programs">
+      <div class="container">
+        <h2 class="section-title">About Uyanaka Trust</h2>
+        <div class="program-grid">
+          <div class="program-card">
+            <div
+              class="program-image"
+              style="
+                background-image: url('mission.jpg');
+                background-color: #90ee90;
+              "
+            ></div>
+            <div class="program-content">
+              <h3>Our Mission</h3>
+              <p>
+                To provide comprehensive support to vulnerable children and
+                orphans in Zimbabwe, ensuring they have access to quality
+                education, proper nutrition, and the care they need to thrive
+                and become productive members of society.
+              </p>
+            </div>
+          </div>
+          <div class="program-card">
+            <div
+              class="program-image"
+              style="
+                background-image: url('vision.jpg');
+                background-color: #ffb347;
+              "
+            ></div>
+            <div class="program-content">
+              <h3>Our Vision</h3>
+              <p>
+                A Zimbabwe where every child, regardless of their circumstances,
+                has the opportunity to receive an education, proper nutrition,
+                and grow up in a caring environment that nurtures their
+                potential.
+              </p>
+            </div>
+          </div>
+          <div class="program-card">
+            <div
+              class="program-image"
+              style="
+                background-image: url('values.jpg');
+                background-color: #87ceeb;
+              "
+            ></div>
+            <div class="program-content">
+              <h3>Our Values</h3>
+              <p>
+                Compassion, Integrity, Transparency, Community Partnership, and
+                Sustainable Impact. We believe in working closely with
+                communities to create lasting positive change.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Programs Section -->
+    <section id="programs" class="impact">
+      <div class="container">
+        <h2 class="section-title">Our Programs</h2>
+        <div class="program-grid">
+          <div class="program-card">
+            <div
+              class="program-image"
+              style="
+                background-image: url('education.jpg');
+                background-color: #98fb98;
+              "
+            ></div>
+            <div class="program-content">
+              <h3><i class="fas fa-graduation-cap"></i> Education Support</h3>
+              <p>
+                We cover school fees, provide uniforms, textbooks, and essential
+                school supplies to ensure children can attend and succeed in
+                school. Our education program has helped over 500 children stay
+                in school.
+              </p>
+            </div>
+          </div>
+          <div class="program-card">
+            <div
+              class="program-image"
+              style="
+                background-image: url('nutrition.jpg');
+                background-color: #ffa07a;
+              "
+            ></div>
+            <div class="program-content">
+              <h3><i class="fas fa-utensils"></i> Supplemental Feeding</h3>
+              <p>
+                Our nutrition program provides daily meals and nutritional
+                supplements to malnourished children, ensuring they have the
+                energy and nutrients needed for healthy growth and learning.
+              </p>
+            </div>
+          </div>
+          <div class="program-card">
+            <div
+              class="program-image"
+              style="
+                background-image: url('healthcare.jpg');
+                background-color: #dda0dd;
+              "
+            ></div>
+            <div class="program-content">
+              <h3><i class="fas fa-heartbeat"></i> Healthcare Support</h3>
+              <p>
+                We provide basic healthcare services, medical checkups, and
+                health education to ensure children maintain good health and can
+                focus on their education and development.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Donation Section -->
+    <section id="donate" class="donation">
+      <div class="container">
+        <h2 class="section-title">Make a Difference</h2>
+        <p style="font-size: 1.2rem; margin-bottom: 2rem">
+          Your donation directly impacts a child's life. Choose how you'd like
+          to help:
+        </p>
+
+        <div class="donation-options">
+          <div class="donation-card">
+            <h3>Education Support</h3>
+            <p>
+              $50 covers school fees for one term<br />$20 provides uniforms and
+              supplies<br />$100 supports a child for a full year
+            </p>
+            <button
+              class="btn btn-primary"
+              onclick="openDonationModal('education')"
+            >
+              Donate for Education
+            </button>
+          </div>
+          <div class="donation-card">
+            <h3>Feeding Program</h3>
+            <p>
+              $10 feeds a child for a week<br />$40 provides monthly
+              nutrition<br />$120 supports year-round feeding
+            </p>
+            <button
+              class="btn btn-primary"
+              onclick="openDonationModal('feeding')"
+            >
+              Donate for Feeding
+            </button>
+          </div>
+          <div class="donation-card">
+            <h3>General Support</h3>
+            <p>
+              Help us address the most urgent needs and maintain our programs
+              effectively
+            </p>
+            <button
+              class="btn btn-primary"
+              onclick="openDonationModal('general')"
+            >
+              Donate Now
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="programs">
+      <div class="container">
+        <h2 class="section-title">Our Impact in Pictures</h2>
+        <div class="program-grid">
+          <div class="program-card">
+            <div
+              class="program-image"
+              style="
+                background-image: url('school1.jpg');
+                background-color: #ffe4b5;
+              "
+            ></div>
+            <div class="program-content">
+              <h3>Back to School</h3>
+              <p>
+                Children receiving new uniforms and school supplies at the start
+                of the academic year.
+              </p>
+            </div>
+          </div>
+          <div class="program-card">
+            <div
+              class="program-image"
+              style="
+                background-image: url('feeding1.jpg');
+                background-color: #f0e68c;
+              "
+            ></div>
+            <div class="program-content">
+              <h3>Nutrition Program</h3>
+              <p>
+                Daily feeding program ensuring children receive nutritious meals
+                to support their growth and learning.
+              </p>
+            </div>
+          </div>
+          <div class="program-card">
+            <div
+              class="program-image"
+              style="
+                background-image: url('graduation1.jpg');
+                background-color: #e6e6fa;
+              "
+            ></div>
+            <div class="program-content">
+              <h3>Success Stories</h3>
+              <p>
+                Celebrating the graduation of children we've supported through
+                their educational journey.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="impact">
+      <div class="container">
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="program-grid">
+          <div class="program-card">
+            <div class="program-content">
+              <h3><i class="fas fa-map-marker-alt"></i> Visit Us</h3>
+              <p>
+                123 Charity Avenue<br />Harare, Zimbabwe<br />P.O. Box 12345
+              </p>
+              <h3 style="margin-top: 2rem">
+                <i class="fas fa-phone"></i> Call Us
+              </h3>
+              <p>+263 77 123 4567<br />+263 24 123 456</p>
+              <h3 style="margin-top: 2rem">
+                <i class="fas fa-envelope"></i> Email Us
+              </h3>
+              <p>info@uyanakatrust.org<br />director@uyanakatrust.org</p>
+            </div>
+          </div>
+          <div class="program-card">
+            <div class="program-content">
+              <h3>Send us a Message</h3>
+              <form id="contactForm">
+                <div class="form-group">
+                  <input type="text" placeholder="Your Name" required />
+                </div>
+                <div class="form-group">
+                  <input type="email" placeholder="Your Email" required />
+                </div>
+                <div class="form-group">
+                  <input type="text" placeholder="Subject" required />
+                </div>
+                <div class="form-group">
+                  <textarea
+                    rows="5"
+                    placeholder="Your Message"
+                    required
+                  ></textarea>
+                </div>
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  style="width: 100%"
+                >
+                  Send Message
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Uyanaka Trust Zimbabwe</h3>
+          <p>
+            Empowering Zimbabwe's children through education, nutrition, and
+            care. Every child deserves a chance to succeed.
+          </p>
+          <div class="social-links">
+            <a href="https://www.facebook.com/UyanakaTrust"
+              ><i class="fab fa-facebook"></i
+            ></a>
+            <a href="https://www.tiktok.com/@uyanakatrustzimbabwe"
+              ><i class="fab fa-tiktok"></i
+            ></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="http://youtube.com/@UyanakaTrust-i4j"
+              ><i class="ffab fa-youtube"></i
+            ></a>
+          </div>
+        </div>
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <p>
+            <a href="#about" style="color: white; text-decoration: none"
+              >About Us</a
+            >
+          </p>
+          <p>
+            <a href="#programs" style="color: white; text-decoration: none"
+              >Our Programs</a
+            >
+          </p>
+          <p>
+            <a href="#donate" style="color: white; text-decoration: none"
+              >Donate</a
+            >
+          </p>
+          <p>
+            <a href="#contact" style="color: white; text-decoration: none"
+              >Contact</a
+            >
+          </p>
+        </div>
+        <div class="footer-section">
+          <h3>Transparency</h3>
+          <p>
+            <a href="#" style="color: white; text-decoration: none"
+              >Annual Reports</a
+            >
+          </p>
+          <p>
+            <a href="#" style="color: white; text-decoration: none"
+              >Financial Statements</a
+            >
+          </p>
+          <p>
+            <a href="#" style="color: white; text-decoration: none"
+              >Impact Reports</a
+            >
+          </p>
+          <p>
+            <a href="#" style="color: white; text-decoration: none"
+              >Donor Recognition</a
+            >
+          </p>
+        </div>
+        <div class="footer-section">
+          <h3>Newsletter</h3>
+          <p>Stay updated with our latest news and impact stories.</p>
+          <form style="margin-top: 1rem">
+            <input
+              type="email"
+              placeholder="Your email address"
+              style="
+                width: 100%;
+                padding: 0.5rem;
+                margin-bottom: 0.5rem;
+                border: none;
+                border-radius: 5px;
+              "
+            />
+            <button type="submit" class="btn btn-primary" style="width: 100%">
+              Subscribe
+            </button>
+          </form>
+        </div>
+      </div>
+      <div
+        style="
+          text-align: center;
+          padding-top: 2rem;
+          border-top: 1px solid #333;
+          margin-top: 2rem;
+        "
+      >
+        <p>
+          &copy; 2025 Uyanaka Trust Zimbabwe. All rights reserved. | Registered
+          Charity No: 123/2024
+        </p>
+      </div>
+    </footer>
+
+    <!-- Donation Modal -->
+    <div id="donationModal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeDonationModal()">&times;</span>
+        <h2 id="modalTitle">Make a Donation</h2>
+        <div id="donationForm">
+          <div class="form-group">
+            <label>Donation Purpose:</label>
+            <select id="donationPurpose">
+              <option value="education">Education Support</option>
+              <option value="feeding">Feeding Program</option>
+              <option value="healthcare">Healthcare Support</option>
+              <option value="general">General Support</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Donation Type:</label>
+            <select id="donationType">
+              <option value="one-time">One-time Donation</option>
+              <option value="monthly">Monthly Recurring</option>
+              <option value="yearly">Yearly Recurring</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Amount (USD):</label>
+            <div class="amount-buttons">
+              <button class="amount-btn" onclick="selectAmount(10)">$10</button>
+              <button class="amount-btn" onclick="selectAmount(25)">$25</button>
+              <button class="amount-btn" onclick="selectAmount(50)">$50</button>
+              <button class="amount-btn" onclick="selectAmount(100)">
+                $100
+              </button>
+              <button class="amount-btn" onclick="selectAmount(200)">
+                $200
+              </button>
+              <input
+                type="number"
+                placeholder="Custom amount"
+                id="customAmount"
+                style="grid-column: span 1"
+              />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Payment Method:</label>
+            <div class="payment-methods">
+              <div class="payment-method" onclick="selectPayment('visa')">
+                <i class="fab fa-cc-visa"></i> Visa Card
+              </div>
+              <div class="payment-method" onclick="selectPayment('ecocash')">
+                <i class="fas fa-mobile-alt"></i> EcoCash
+              </div>
+              <div class="payment-method" onclick="selectPayment('onemoney')">
+                <i class="fas fa-mobile-alt"></i> OneMoney
+              </div>
+              <div class="payment-method" onclick="selectPayment('mukuru')">
+                <i class="fas fa-money-transfer"></i> Mukuru
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Your Information:</label>
+            <input type="text" placeholder="Full Name" required />
+            <input
+              type="email"
+              placeholder="Email Address"
+              required
+              style="margin-top: 0.5rem"
+            />
+            <input
+              type="tel"
+              placeholder="Phone Number"
+              style="margin-top: 0.5rem"
+            />
+          </div>
+
+          <div class="form-group">
+            <label>
+              <input type="checkbox" required /> I agree to receive donation
+              receipts and updates about our impact.
+            </label>
+          </div>
+
+          <button
+            class="btn btn-primary"
+            style="width: 100%; padding: 1rem; font-size: 1.2rem"
+            onclick="processDonation()"
+          >
+            Complete Donation
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Smooth scrolling for navigation links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+          anchor.addEventListener('click', function (e) {
+              e.preventDefault();
+              const target = document.querySelector(this.getAttribute('href'));
+              if (target) {
+                  target.scrollIntoView({
+                      behavior: 'smooth',
+                      block: 'start'
+                  });
+              }
+          });
+      });
+
+      // Donation Modal Functions
+      function openDonationModal(purpose) {
+          document.getElementById('donationModal').style.display = 'block';
+          document.getElementById('donationPurpose').value = purpose;
+
+          const titles = {
+              'education': 'Donate for Education Support',
+              'feeding': 'Donate for Feeding Program',
+              'general': 'Make a General Donation'
+          };
+          document.getElementById('modalTitle').textContent = titles[purpose] || 'Make a Donation';
+      }
+
+      function closeDonationModal() {
+          document.getElementById('donationModal').style.display = 'none';
+      }
+
+      function selectAmount(amount) {
+          // Remove active class from all buttons
+          document.querySelectorAll('.amount-btn').forEach(btn => btn.classList.remove('active'));
+          // Add active class to clicked button
+          event.target.classList.add('active');
+          // Clear custom amount if preset amount is selected
+          document.getElementById('customAmount').value = '';
+      }
+
+      let selectedPayment = '';
+      function selectPayment(method) {
+          // Remove active class from all payment methods
+          document.querySelectorAll('.payment-method').forEach(pm => pm.classList.remove('active'));
+          // Add active class to selected payment method
+          event.target.classList.add('active');
+          selectedPayment = method;
+      }
+
+      function processDonation() {
+          // Get form values
+          const purpose = document.getElementById('donationPurpose').value;
+          const type = document.getElementById('donationType').value;
+          const customAmount = document.getElementById('customAmount').value;
+          const activeAmountBtn = document.querySelector('.amount-btn.active');
+          const amount = customAmount || (activeAmountBtn ? activeAmountBtn.textContent.replace(', '') : '');
+
+          if (!amount || !selectedPayment) {
+              alert('Please select an amount and payment method.');
+              return;
+          }
+
+          // Here you would integrate with actual payment processors
+          // For now, show a message with integration guidance
+          alert(`Thank you for your ${amount} USD donation for ${purpose}!\n\nTo complete the integration, you'll need to:\n\n1. For Visa: Integrate with Stripe, PayPal, or local payment processor\n2. For EcoCash: Contact Econet for API integration\n3. For OneMoney: Contact NetOne for merchant services\n4. For Mukuru: Contact Mukuru for business account setup\n\nWe'll send you detailed integration guides for each payment method.`);
+
+          // Close modal
+          closeDonationModal();
+
+          // Show success message
+          showSuccessMessage();
+      }
+
+      function showSuccessMessage() {
+          const successDiv = document.createElement('div');
+          successDiv.className = 'success-message';
+          successDiv.innerHTML = `
+              <h3>Thank you for your donation!</h3>
+              <p>Your contribution will make a real difference in a child's life. You'll receive a donation receipt via email shortly.</p>
+          `;
+
+          // Insert after hero section
+          const hero = document.querySelector('.hero');
+          hero.parentNode.insertBefore(successDiv, hero.nextSibling);
+
+          // Remove message after 10 seconds
+          setTimeout(() => {
+              successDiv.remove();
+          }, 10000);
+      }
+
+      // Contact form submission
+      document.getElementById('contactForm').addEventListener('submit', function(e) {
+          e.preventDefault();
+          alert('Thank you for your message! We\'ll get back to you within 24 hours.');
+          this.reset();
+      });
+
+      // Newsletter subscription
+      const newsletterForms = document.querySelectorAll('footer form');
+      newsletterForms.forEach(form => {
+          form.addEventListener('submit', function(e) {
+              e.preventDefault();
+              alert('Thank you for subscribing to our newsletter!');
+              this.reset();
+          });
+      });
+
+      // Mobile menu toggle
+      const mobileMenu = document.querySelector('.mobile-menu');
+      const navLinks = document.querySelector('.nav-links');
+
+      mobileMenu.addEventListener('click', function() {
+          navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+          if (navLinks.style.display === 'flex') {
+              navLinks.style.flexDirection = 'column';
+              navLinks.style.position = 'absolute';
+              navLinks.style.top = '80px';
+              navLinks.style.left = '0';
+              navLinks.style.width = '100%';
+              navLinks.style.backgroundColor = '#2c5530';
+              navLinks.style.padding = '1rem';
+              navLinks.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
+          }
+      });
+
+      // Close mobile menu when clicking on a link
+      document.querySelectorAll('.nav-links a').forEach(link => {
+          link.addEventListener('click', function() {
+              if (window.innerWidth <= 768) {
+                  navLinks.style.display = 'none';
+              }
+          });
+      });
+
+      // Close modal when clicking outside
+      window.addEventListener('click', function(event) {
+          const modal = document.getElementById('donationModal');
+          if (event.target === modal) {
+              closeDonationModal();
+          }
+      });
+
+      // Animate statistics on scroll
+      function animateStats() {
+          const statNumbers = document.querySelectorAll('.stat-number');
+          const observer = new IntersectionObserver((entries) => {
+              entries.forEach(entry => {
+                  if (entry.isIntersecting) {
+                      const target = parseInt(entry.target.textContent.replace(/[^\d]/g, ''));
+                      animateNumber(entry.target, target);
+                      observer.unobserve(entry.target);
+                  }
+              });
+          });
+
+          statNumbers.forEach(stat => observer.observe(stat));
+      }
+
+      function animateNumber(element, target) {
+          let current = 0;
+          const increment = target / 50;
+          const timer = setInterval(() => {
+              current += increment;
+              if (current >= target) {
+                  current = target;
+                  clearInterval(timer);
+              }
+              element.textContent = Math.floor(current) + (element.textContent.includes('+') ? '+' : '') + (element.textContent.includes('%') ? '%' : '');
+          }, 30);
+      }
+
+      // Carousel functionality
+      let currentSlideIndex = 0;
+      const slides = document.querySelectorAll('.carousel-slide');
+      const dots = document.querySelectorAll('.carousel-dot');
+      const totalSlides = slides.length;
+
+      function showSlide(index) {
+          // Remove active class from all slides and dots
+          slides.forEach(slide => slide.classList.remove('active'));
+          dots.forEach(dot => dot.classList.remove('active'));
+
+          // Add active class to current slide and dot
+          slides[index].classList.add('active');
+          dots[index].classList.add('active');
+      }
+
+      function changeSlide(direction) {
+          currentSlideIndex += direction;
+
+          if (currentSlideIndex >= totalSlides) {
+              currentSlideIndex = 0;
+          } else if (currentSlideIndex < 0) {
+              currentSlideIndex = totalSlides - 1;
+          }
+
+          showSlide(currentSlideIndex);
+      }
+
+      function currentSlide(index) {
+          currentSlideIndex = index - 1;
+          showSlide(currentSlideIndex);
+      }
+
+      // Auto-advance carousel every 6 seconds
+      function startCarousel() {
+          setInterval(() => {
+              changeSlide(1);
+          }, 6000);
+      }
+
+      // Touch/swipe support for mobile
+      let touchStartX = 0;
+      let touchEndX = 0;
+
+      function handleTouchStart(e) {
+          touchStartX = e.touches[0].clientX;
+      }
+
+      function handleTouchEnd(e) {
+          touchEndX = e.changedTouches[0].clientX;
+          handleSwipe();
+      }
+
+      function handleSwipe() {
+          const swipeThreshold = 50;
+          const diff = touchStartX - touchEndX;
+
+          if (Math.abs(diff) > swipeThreshold) {
+              if (diff > 0) {
+                  // Swipe left - next slide
+                  changeSlide(1);
+              } else {
+                  // Swipe right - previous slide
+                  changeSlide(-1);
+              }
+          }
+      }
+
+      // Add touch event listeners to carousel
+      const carousel = document.querySelector('.hero-carousel');
+      carousel.addEventListener('touchstart', handleTouchStart, { passive: true });
+      carousel.addEventListener('touchend', handleTouchEnd, { passive: true });
+
+      // Keyboard navigation
+      document.addEventListener('keydown', function(e) {
+          if (e.key === 'ArrowLeft') {
+              changeSlide(-1);
+          } else if (e.key === 'ArrowRight') {
+              changeSlide(1);
+          }
+      });
+
+      // Pause carousel on hover
+      const heroSection = document.querySelector('.hero');
+      let carouselInterval;
+
+      function pauseCarousel() {
+          clearInterval(carouselInterval);
+      }
+
+      function resumeCarousel() {
+          carouselInterval = setInterval(() => {
+              changeSlide(1);
+          }, 6000);
+      }
+
+      heroSection.addEventListener('mouseenter', pauseCarousel);
+      heroSection.addEventListener('mouseleave', resumeCarousel);
+
+      // Initialize carousel
+      document.addEventListener('DOMContentLoaded', function() {
+          showSlide(0);
+          resumeCarousel();
+      });
+
+      // Add CSS for active states
+      const additionalStyles = `
+          <style>
+              .payment-method.active {
+                  background: rgba(255,255,255,0.3) !important;
+                  border: 2px solid white;
+              }
+
+              .amount-btn.active {
+                  background: white !important;
+                  color: #2c5530 !important;
+              }
+
+              @media (max-width: 768px) {
+                  .nav-links {
+                      display: none;
+                  }
+
+                  .payment-methods {
+                      grid-template-columns: 1fr;
+                  }
+
+                  .modal-content {
+                      margin: 10% auto;
+                      width: 95%;
+                  }
+              }
+
+              .success-message {
+                  max-width: 1200px;
+                  margin: 2rem auto;
+                  margin-left: auto;
+                  margin-right: auto;
+              }
+          </style>
+      `;
+
+      // Add the additional styles to the document
+      document.head.insertAdjacentHTML('beforeend', additionalStyles);
+    </script>
+  </body>
+</html>
